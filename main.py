@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 def main():
     print('Hello world :))')
+    print("Bobber kurwa")
 
     return 
 
