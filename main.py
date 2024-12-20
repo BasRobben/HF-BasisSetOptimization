@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def main():
-    print('Hello world :)')
+    print('Hello world :))')
 
     x = np.linspace(0,1,1000)
     y = np.sin(2*np.pi*x)
