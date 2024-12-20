@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def main():
-    print('Hello world :)')
+    print('Hello world :))')
 
     return 
 
