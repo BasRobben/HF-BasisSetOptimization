@@ -22,7 +22,7 @@ def calculate_co():
     mol_co = MoleculeBuilder().from_name('CO')
     result_hf = HF().rhf(mol_co, 'sto3g')
     print(f"Total energy CO: {result_hf['energy']} Hartree's")
-
+    print(f"Orbital energies CO: {result_hf['orbe']} Hartree's")
     return result_hf['cgfs'], result_hf['orbc']
 
 
@@ -31,7 +31,7 @@ def calculate_ch4():
     mol_ch4 = MoleculeBuilder().from_name('CH4')
     result_hf = HF().rhf(mol_ch4, 'sto3g')
     print(f"Total energy CH4: {result_hf['energy']} Hartree's")
-
+    print(f"Orbital energies CH4: {result_hf['orbe']} Hartree's")
     return result_hf['cgfs'], result_hf['orbc']
 
 
