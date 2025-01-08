@@ -23,7 +23,6 @@ from scipy.optimize import minimize
 #   3.80389436e-01  5.03315112e+00  1.16959613e+00  3.80389215e-01]
 
 
-
 def main():
     mol_co = MoleculeBuilder().from_name('CO')
 
