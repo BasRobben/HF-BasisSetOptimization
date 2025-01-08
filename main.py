@@ -9,10 +9,10 @@ def main():
     # fetches the contracted gaussian functionals (CGF) and the orbital coefficients (orbc) from
     # calculate_co and calculate_ch4 and builds individual file isosurfaces
     # depending on the value of orbitals.
-    orbitals = 9
+    num_atomic_orbitals = 9
     cgfs_co, orbc_co = calculate_co()
     cgfs_ch4, orbc_ch4 = calculate_ch4()
-    for number_orbitals in range(0, orbitals):
+    for number_orbitals in range(0, num_atomic_orbitals):
         build_isosurface(f'co_{number_orbitals}.ply', cgfs_co, orbc_co[:,number_orbitals], 0.1)
         build_isosurface(f'ch4_{number_orbitals}.ply', cgfs_ch4, orbc_ch4[:,number_orbitals], 0.1)
 
