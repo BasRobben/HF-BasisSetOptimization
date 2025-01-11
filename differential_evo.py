@@ -46,10 +46,21 @@ def createCGFs(p_C, p_O, CO_c, CO_a):
 
 # Objective function for optimization
 def objective_function(params, p_C, p_O, CO_c, CO_a, mol_co):
-    CO_c[2] = params[:3]
-    CO_a[2] = params[3:6]
-    CO_c[5] = params[6:9]
-    CO_a[5] = params[9:12]
+    # # Optimizing C2p, O2p
+    # CO_c[2] = params[:3]
+    # CO_a[2] = params[3:6]
+    # CO_c[5] = params[6:9]
+    # CO_a[5] = params[9:12]
+
+    # Optimizing C2p, C2s, O2p, O2s
+    CO_c[1] = params[:3]
+    CO_a[1] = params[3:6]
+    CO_c[2] = params[6:9]
+    CO_a[2] = params[9:12]
+    CO_c[4] = params[12:15]
+    CO_a[4] = params[15:18]
+    CO_c[5] = params[18:21]
+    CO_a[5] = params[21:24]
 
     cgfs = createCGFs(p_C, p_O, CO_c, CO_a)
     result_hf = HF().rhf(mol_co, cgfs)
@@ -93,7 +104,7 @@ def main():
     bounds_a = [(0.1, 100)] * 3  # Exponents bounds
     bounds_all = bounds_c + bounds_a + bounds_c + bounds_a  # For both C 2p and O 2p
 
-
+    bounds_all = bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a  # For both C2p, C2s, O2p, O2s
 
     # Perform optimization using differential evolution
     # These settings take 3 hours :) (please help)
