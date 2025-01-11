@@ -112,7 +112,7 @@ def main():
         disp=True  # Display progress
     )
 
-    print(f"Optimized coefficients and exponents: {result.x}")
+    print(f"Optimized coefficients and exponents:\n {result.x}")
     print(f"Minimum energy: {result.fun} Hartrees")
 
     # Final Hartree-Fock calculation with optimized parameters
