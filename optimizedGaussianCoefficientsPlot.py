@@ -4,7 +4,7 @@ from math import factorial
 import matplotlib.pyplot as plt
 
 
-# Change zeta parameter for closest fit to that specific orbital of atom
+# Change zeta parameter in print (at the bottom) for closest fit to that specific orbital of atom
 # Also uncomment the parts of code that matter for the target orbital and for the primitive calculation
 # And change in def objective the return to the uncommented target sto and the plot as well
 
