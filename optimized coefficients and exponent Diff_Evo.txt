@@ -1,3 +1,19 @@
+Taken with following settings:
+    result = differential_evolution(
+        objective_function,
+        bounds=bounds_all,
+        args=(p_C, p_O, CO_c, CO_a, mol_co),  # Pass the necessary arguments
+        strategy='best1bin',
+        maxiter=1000,
+        popsize=15,
+        tol=1e-6,
+        mutation=(0.5, 1.0),
+        recombination=0.7,
+        updating='deferred',
+        workers = -1,
+        disp=True  # Display progress
+    )
+
 optimized coefficients and exponents:
 [0.07643659 0.01811432 0.07263501 
  0.85724886 4.30904713 0.19888731
@@ -14,7 +30,21 @@ structure of optimized coefficients and exponents matrix:
 Optimized energy: 
 -111.42961325060227 Hartree's
 
-
+Taken with following settings:
+    result = differential_evolution(
+        objective_function,
+        bounds=bounds_all,
+        args=(p_C, p_O, CO_c, CO_a, mol_co),  # Pass the necessary arguments
+        strategy='best1bin',
+        maxiter=1000,
+        popsize=15,
+        tol=1e-6,
+        mutation=(0.5, 1.0),
+        recombination=0.7,
+        updating='deferred',
+        workers = -1,
+        disp=True  # Display progress
+    )
 
 Energy: -133.169176208355, 
 
@@ -52,7 +82,8 @@ Optimized coefficients and exponents:
 
 Minimum energy: -133.82886476944685 Hartrees
 
-Nelder-Mead:
+
+Nelder-Mead expanded to S orbitals:
 Optimized parameters: 
 [-0.09867796  0.4054212   0.67271986  3.89093047  0.61250592  0.18834247
   0.138437    0.57803049  0.51050188  4.26375234  0.83731689  0.19324983
