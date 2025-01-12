@@ -102,7 +102,7 @@ def main():
     # Define bounds
     bounds_c = [(-0.1, 1.0)] * 3  # Coefficients bounds
     bounds_a = [(0.1, 100)] * 3  # Exponents bounds
-    bounds_all = bounds_c + bounds_a + bounds_c + bounds_a  # For both C 2p and O 2p
+    # bounds_all = bounds_c + bounds_a + bounds_c + bounds_a  # For both C 2p and O 2p
 
     bounds_all = bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a  # For both C2p, C2s, O2p, O2s
 
