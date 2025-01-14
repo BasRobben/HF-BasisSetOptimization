@@ -127,3 +127,46 @@ structure matrix:
   [1., -4.42063585e-02, -8.28748560e-03],
   [0.58056914, 1.76628246, 7.22355583],
   [1., 1., 0.52778558]]
+
+
+
+  CH4: Lowest so far found (will run multiple times with different settings)
+Optimized coefficients and exponents:
+ [-0.09988706  0.25192232  0.62775783  4.74384002  0.53875824  0.33611506
+  0.15069385  0.5283842   0.44201152  3.35959523  0.68907755  0.18757393
+  0.11013043  0.53710709  0.47147141  4.29763716  0.68158787  0.14609496
+  0.14921661  0.62512329  0.46270869  3.840744    0.63646773  0.1418655
+  0.14837439  0.53940812  0.50453552  3.63859021  0.66118605  0.15342265
+  0.11918225  0.54266603  0.51528523  3.99035767  0.71129007  0.16742802]
+Minimum energy: -39.76750981680061 Hartrees
+
+CH4: Lowest energy found by explorative strategies
+Settings used:
+    result = differential_evolution(
+        objective_function,
+        bounds=bounds_all,
+        args=(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a, mol_ch4),
+        strategy='randtobest1bin',
+        maxiter=1000,
+        popsize=pop_size,
+        tol=1e-6,
+        mutation=(0.4, 1.2),
+        recombination=0.7,
+        updating='deferred',
+        workers=-1,
+        disp=True,
+        # init=initial_population, # Pass the custom population
+    )
+
+
+Optimized coefficients and exponents:
+ [ 2.12385613e-02 -3.46844918e-03  7.57970510e-01  4.71886365e+01
+  7.08219702e+01  3.25899657e-01  4.24060421e-02  2.51087740e-01
+  3.04924789e-01  5.11324412e+00  9.19647175e-01  1.77795944e-01
+  1.43467444e-01  5.54237137e-03  3.31144931e-02  4.24318746e-01
+  2.14153746e+01  2.58080694e+00  2.13172226e-03  6.78463858e-02
+  3.37537415e-01  6.36223984e+01  3.14594966e+00  5.12417005e-01
+  2.13746408e-02  8.61360446e-01  2.13137684e-01  2.75117204e+01
+  4.69556965e-01  3.03868411e+00  9.34929751e-01  4.65997715e-02
+  5.08903556e-01  3.30817383e-01  1.64209810e+01  1.58144265e+00]
+Minimum energy: -39.72416840080783 Hartrees
