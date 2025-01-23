@@ -1,8 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from pyqint import HF, MoleculeBuilder, cgf
 from scipy.optimize import minimize
-from joblib import Parallel, delayed
 
 def main():
     mol_co = MoleculeBuilder().from_name('CO')
