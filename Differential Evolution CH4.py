@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from pyqint import HF, MoleculeBuilder, cgf
-from scipy.optimize import differential_evolution
+from scipy.optimize import differential_evolution, minimize
 
 
 def createCGFs(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a):
@@ -50,11 +50,6 @@ def createCGFs(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a):
 
 # Objective function for optimization
 def objective_function(params, p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a, mol_ch4):
-    # # Optimizing C2p, O2p
-    # CO_c[2] = params[:3]
-    # CO_a[2] = params[3:6]
-    # CO_c[5] = params[6:9]
-    # CO_a[5] = params[9:12]
 
     # Optimizing C2s, C2p, H1s x4
     CH4_c[1] = params[:3]
@@ -82,10 +77,10 @@ def main():
 
     # Define atom positions
     p_C = np.array([0.000000, 0.000000, 0.000000])
-    p_H1 = np.array([1.195756, 1.195756, 1.195756])
-    p_H2 = np.array([-1.195756,-1.195756,1.195756])
-    p_H3 = np.array([-1.195756,1.195756,-1.195756])
-    p_H4 = np.array([1.195756,-1.195756,-1.195756])
+    p_H1 = np.array([0.6327670, 0.6327670, 0.6327670])
+    p_H2 = np.array([-0.6327670, -0.6327670, 0.6327670])
+    p_H3 = np.array([-0.6327670, 0.6327670, -0.6327670])
+    p_H4 = np.array([0.6327670, -0.6327670, -0.6327670])
 
     # Initial coefficients and exponents for the STO-3G basis set
     CH4_c = np.array([
@@ -176,7 +171,7 @@ def main():
         objective_function,
         bounds=bounds_all,
         args=(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a, mol_ch4),
-        strategy='rand2bin',
+        strategy='best1bin',
         maxiter=1000,
         popsize=pop_size,
         tol=1e-6,
@@ -185,47 +180,16 @@ def main():
         updating='deferred',
         workers=-1,
         disp=True,
-        init=initial_population, # Pass the custom population
+        # init=initial_population, # Pass the custom population
     )
 
-    # # Perform optimization using differential evolution
-    # # These settings take 3 hours :) (please help)
-    # result = differential_evolution(
-    #     objective_function,
-    #     bounds=bounds_all,
-    #     args=(p_C, p_O, CO_c, CO_a, mol_co), # Pass the necessary arguments
-    #     strategy='currenttobest1bin',
-    #     maxiter=1000, # set iteration per population size
-    #     popsize=15, # set population size
-    #     tol=1e-6,
-    #     mutation=(0.5, 1.0),
-    #     recombination=0.7,
-    #     updating='deferred',
-    #     workers = -1, # allocate all cores
-    #     disp=True, # Display progress
-    #     x0 = np.array([
-    #               [0.155916, 0.607684, 0.391957],
-    #               [2.941249, 0.683483, 0.22229],
-    #               [0.154329, 0.535328, 0.444635],
-    #               [130.70932, 23.808861, 6.443608],
-    #               [-0.099967, 0.399513, 0.700115],
-    #               [5.033151, 1.169596, 0.380389],
-    #               [0.155916, 0.607684, 0.391957],
-    #               [5.033151, 1.169596, 0.380389]
-    #               ]).flatten(order='C'),
-    #     init='custom',
-    #     callback=optimization_callback
-    # )
+
+    # result = minimize(objective_function, x0_flattened, method='Nelder-Mead', bounds=bounds_all, args=(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a, mol_ch4))
+
+
 
     print(f"Optimized coefficients and exponents:\n {result.x}")
     print(f"Minimum energy: {result.fun} Hartrees")
-
-    # # Final Hartree-Fock calculation with optimized parameters
-    # CO_c[2], CO_a[2] = result.x[:3], result.x[3:6]
-    # CO_c[5], CO_a[5] = result.x[6:9], result.x[9:12]
-    # cgfs_opt = createCGFs(p_C, p_O, CO_c, CO_a)
-    # result_hf_opt = HF().rhf(mol_co, cgfs_opt)
-    # print(f"Final optimized Hartree-Fock energy: {result_hf_opt['energy']} Hartrees")
 
 
 if __name__ == '__main__':
