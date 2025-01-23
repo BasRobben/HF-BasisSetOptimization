@@ -71,14 +71,14 @@ To optimize basis set parameters, run the respective script for the desired mole
 ---
 
 ## Examples
-# Example Output (RHF Calculation)
+### Example Output (RHF Calculation)
 For `molecule_name = 'CO'` and `set_name = STO-3G`:
   - Total energy: -111.21925705796176 Hartrees
   - Orbital energies: [-20.39137481 -11.09020628  -1.40474568  -0.68994908  -0.50938169
   -0.50938169  -0.44087481   0.28652536   0.28652536   0.92528128] Hartrees
   - Generated PLY Files: `co_0_neg.ply`, `co_0_pos.ply`, `co_1_neg.ply`, etc.
 
-# Visualizing MOs:
+### Visualizing MOs:
 Import the generated PLY files into Blender or any other 3D rendering software to view the MO isosurfaces. 
 Each MO consists of two isosurfaces: positive (`pos`) and negative (`neg`)
 
