@@ -40,8 +40,8 @@ def main():
     # Initial guess for the optimization
     initial_guess = np.concatenate([CH4_c[1], CH4_a[1], CH4_c[2], CH4_a[2], CH4_c[3], CH4_a[3], CH4_c[4], CH4_a[4], CH4_c[5], CH4_a[5], CH4_c[6], CH4_a[6]])  # Initial guesses for C2p, C2s, O2p, O2s
 
-    bounds_c = [(-1.0, 1.0)] * 3
-    bounds_a = [(-100, 100)] * 3
+    bounds_c = [(-1, 1)] * 3
+    bounds_a = [(0, 100)] * 3
 
     # Expand this for all required orbitals
     n_orbitals = int(np.size(initial_guess) / 6)
