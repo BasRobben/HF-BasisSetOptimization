@@ -45,7 +45,7 @@ The following Python packages are required:
 
 ---
 ## Usage
-### Running RHF Calculations
+# Running RHF Calculations
 
 1. Open `main.py` and specify the desired molecule and basis set:
     ```python
@@ -62,7 +62,7 @@ The following Python packages are required:
     - Total electronic energy and individual MO energies are printed in the console in Hartrees.
     - PLY files containing MO isosurfaces are generated in the working directory. Use the naming convention to identify them: `<molecule>_<MO_index>_<phase>.ply`.
 
-### Running Optimization Scripts
+# Running Optimization Scripts
 To optimize basis set parameters, run the respective script for the desired molecule. For example, to perform Nelder-Mead optimization for CO:
     ```sh
     python nelder-mead-CO.py
