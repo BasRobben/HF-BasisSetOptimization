@@ -1,7 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from pyqint import HF, MoleculeBuilder, cgf
-from scipy.optimize import differential_evolution, minimize
+from scipy.optimize import differential_evolution
 
 
 def createCGFs(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a):
@@ -182,9 +181,6 @@ def main():
         disp=True,
         # init=initial_population, # Pass the custom population
     )
-
-
-    # result = minimize(objective_function, x0_flattened, method='Nelder-Mead', bounds=bounds_all, args=(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a, mol_ch4))
 
 
 

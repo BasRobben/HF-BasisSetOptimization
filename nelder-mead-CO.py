@@ -33,34 +33,19 @@ def main():
     print(f"STO-3G Hartree-Fock energy: {result_hf_opt['energy']} Hartrees")
 
     # Initial guess for the optimization
-    # initial_guess = [0.155916, 0.607684, 0.391957, 2.941249, 0.683483, 0.22229]  # Initial guesses for C2p
-
-    # initial_guess = np.concatenate([CO_c[2], CO_a[2], CO_c[5], CO_a[5]])    # Initial guesses for C2p and O2p
-
     initial_guess = np.concatenate([CO_c[1], CO_a[1], CO_c[2], CO_a[2], CO_c[4], CO_a[4], CO_c[5], CO_a[5]])  # Initial guesses for C2p, C2s, O2p, O2s
 
-    bounds_c = [(-1, 1.0)] * 3
+    bounds_c = [(-1.0, 1.0)] * 3
     bounds_a = [(-100, 100)] * 3
 
     # Expand this for all required orbitals
     n_orbitals = int(np.size(initial_guess) / 6)
-    print(n_orbitals)
     bounds_all = (
         (bounds_c + bounds_a) * n_orbitals
     )
 
     # Optimization function
     def objective_function(params):
-        # Optimizing
-        # c1, c2, c3, a1, a2, a3 = params
-        # CO_c[2] = [c1, c2, c3]
-        # CO_a[2] = [a1, a2, a3]
-
-        # Optimizing C2p and O2p
-        # CO_c[2] = params[:3]
-        # CO_a[2] = params[3:6]
-        # CO_c[5] = params[6:9]
-        # CO_a[5] = params[9:12]
 
         # Optimizing C2p, C2s, O2p, O2s
         CO_c[1] = params[:3]

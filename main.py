@@ -1,6 +1,4 @@
-import sys
 import numpy as np
-import matplotlib.pyplot as plt
 from pyqint import HF, PyQInt,  MoleculeBuilder, cgf
 from pytessel import PyTessel
 import json
@@ -32,11 +30,11 @@ def main():
     # Build isosurfaces for molecular orbitals
     if molecule_name == 'CO':
         for i in range(0, 10):  # 10 MOs: 5 AOs each atom
-            build_isosurface(f'co_{i}.ply', cgfs_res, orbc_res[:,i], 0.1)
+            build_isosurface(f'co_{i}', cgfs_res, orbc_res[:,i], 0.1)
 
     elif molecule_name == 'CH4':
         for i in range(0, 9):   # 9 MOs: 5 AOs for C and 4 AOs for H4
-            build_isosurface(f'ch4_{i}.ply', cgfs_res, orbc_res[:,i], 0.1)
+            build_isosurface(f'ch4_{i}', cgfs_res, orbc_res[:,i], 0.1)
 
     else:
         raise ValueError("Unsupported molecule")

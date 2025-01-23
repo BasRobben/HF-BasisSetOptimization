@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from pyqint import HF, MoleculeBuilder, cgf
 from scipy.optimize import differential_evolution
 

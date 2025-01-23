@@ -1,81 +1,88 @@
 # Hartree-Fock Basis Set Optimization
 
-This project performs Hartree-Fock calculations and builds isosurfaces for molecular orbitals using specified basis sets.
+This project employs a Restricted Hartree-Fock (RHF) procedure to optimize basis sets for the CO and CH₄ molecules. By implementing three distinct optimization methods — direct fitting, Nelder-Mead (NM) minimization, and Differential Evolution (DE) — the primary goal is to achieve lower total electronic energies compared to the widely-used STO-3g basis set.  The latter two methods were particularly effective in achieving this.
+
+In addition to analyzing the total electronic energy, the project explores the individual molecular orbital (MO) energies and their geometries relative to those obtained with the reference STO-3g basis set.
+
+---
+
+## Features
+
+- **Optimization Techniques**: Three separate scripts implement direct fitting, Nelder-Mead minimization, and Differential Evolution to optimize basis set parameters.
+- **Basis Set Storage**: Optimized basis sets are saved in the `basissets.json` file, categorized by molecule, including atom positions (in Angstroms).
+- **RHF Calculations**: The `main.py` script performs RHF calculations using the optimized basis sets, outputs total electronic energy and orbital energies (in Hatrees), and generates PLY files for MO visualization.
+- **Molecular Orbital Visualization**: PLY files of MO isosurfaces (positive and negative phases) are generated for easy import into 3D rendering software like Blender.
+
+---
 
 ## Requirements
 
-- Python 3.x
-- NumPy
-- Matplotlib
-- PyQInt
-- PyTessel
+The following Python packages are required:
+
+- **For RHF Calculations (main script)**:
+  - `numpy`
+  - `pyqint`
+  - `pytessel`
+  - `json`
+
+- **For Optimization Scripts**:
+  - `scipy` (in addition to the above)
+
+---
 
 ## Installation
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/HF-BasisSetOptimization.git
+    git clone https://github.com/BasRobben/HF-BasisSetOptimization.git
     cd HF-BasisSetOptimization
     ```
 
-2. Install the required packages:
+2. Install the required Python packages:
     ```sh
-    pip install numpy matplotlib pyqint pytessel
+    pip install numpy pyqint pytessel json scipy
     ```
 
+---
 ## Usage
+### Running RHF Calculations
 
-1. Edit the [main.py](http://_vscodecontentref_/0) file to specify the molecule and basis set:
+1. Open `main.py` and specify the desired molecule and basis set:
     ```python
     molecule_name = 'CO'  # Choose between 'CO' or 'CH4'
-    set_name = 'STO-3G'   # Choose basis set
+    set_name = 'STO-3G'   # Choose the desired basis set
     ```
 
-2. Run the main script:
+2. Run the main script to perform an RHF calculation:
     ```sh
     python main.py
     ```
 
-## Functions
+3. Outputs:
+    - Total electronic energy and individual MO energies are printed in the console in Hartrees.
+    - PLY files containing MO isosurfaces are generated in the working directory. Use the naming convention to identify them: `<molecule>_<MO_index>_<phase>.ply`.
 
-### [main()](http://_vscodecontentref_/1)
+### Running Optimization Scripts
+To optimize basis set parameters, run the respective script for the desired molecule. For example, to perform Nelder-Mead optimization for CO:
+    ```sh
+    python nelder-mead-CO.py
+    ```
 
-Main function to perform Hartree-Fock calculations and build isosurfaces for molecular orbitals.
+---
 
-### `build_isosurface(filename, cgfs, coeff, isovalue)`
+## Examples
+# Example Output (RHF Calculation)
+For `molecule_name = 'CO'` and `set_name = STO-3G`:
+  - Total energy: -111.21925705796176 Hartrees
+  - Orbital energies: [-20.39137481 -11.09020628  -1.40474568  -0.68994908  -0.50938169
+  -0.50938169  -0.44087481   0.28652536   0.28652536   0.92528128] Hartrees
+  - Generated PLY Files: `co_0_neg.ply`, `co_0_pos.ply`, `co_1_neg.ply`, etc.
 
-Builds an isosurface for a molecular orbital and saves it to a file.
+# Visualizing MOs:
+Import the generated PLY files into Blender or any other 3D rendering software to view the MO isosurfaces. 
+Each MO consists of two isosurfaces: positive (`pos`) and negative (`neg`)
 
-- **Parameters:**
-  - `filename` (str): The name of the file to save the isosurface to.
-  - [cgfs](http://_vscodecontentref_/2) (list): List of contracted Gaussian functions.
-  - `coeff` (numpy.ndarray): Coefficients for the molecular orbital.
-  - `isovalue` (float): Isovalue for the isosurface.
-
-### [read_json(filename, molecule_name, set_name)](http://_vscodecontentref_/3)
-
-Reads basis set parameters from a JSON file for a specified molecule and basis set.
-
-- **Parameters:**
-  - `filename` (str): The name of the JSON file.
-  - [molecule_name](http://_vscodecontentref_/4) (str): The name of the molecule.
-  - [set_name](http://_vscodecontentref_/5) (str): The name of the basis set.
-
-- **Returns:**
-  - `tuple`: A tuple containing positions, coefficients, and alphas.
-
-### [createCGFs(positions, coefficients, alphas)](http://_vscodecontentref_/6)
-
-Creates contracted Gaussian functions (CGFs) for a molecule.
-
-- **Parameters:**
-  - [positions](http://_vscodecontentref_/7) (dict): Dictionary of atomic positions.
-  - [coefficients](http://_vscodecontentref_/8) (list): List of coefficients for the Gaussian functions.
-  - [alphas](http://_vscodecontentref_/9) (list): List of exponents for the Gaussian functions.
-
-- **Returns:**
-  - `list`: A list of CGFs for the molecule.
+---
 
 ## License
-
 This project is licensed under the MIT License.
