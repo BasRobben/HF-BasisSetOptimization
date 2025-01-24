@@ -102,27 +102,6 @@ def main():
         [0.3425250914E+01, 0.6239137298E+00, 0.1688554040E+00],  # H 1s
     ])
 
-    # Matrices of STO-fit-3G
-    # CH4_c = np.array([
-    #                     [0.154329, 0.535328, 0.444635],
-    #                     [-0.09988706,  0.25192232,  0.62775783],
-    #                     [0.15069385,  0.5283842,   0.44201152],
-    #                     [0.14921661,  0.62512329,  0.46270869],
-    #                     [0.14837439,  0.53940812,  0.50453552],
-    #                     [3.63859021,  0.66118605,  0.15342265],
-    #                     [3.99035767,  0.71129007,  0.16742802]
-    #                 ])
-    #
-    # CH4_a = np.array([
-    #                     [71.616837, 13.045096, 3.530512],
-    #                     [4.74384002,  0.53875824,  0.33611506],
-    #                     [3.35959523,  0.68907755,  0.18757393],
-    #                     [4.29763716,  0.68158787,  0.14609496],
-    #                     [3.840744,    0.63646773,  0.1418655],
-    #                     [3.63859021, 0.66118605,  0.15342265],
-    #                     [3.99035767,  0.71129007,  0.16742802]
-    #                 ])
-
 
     cgfs_opt = createCGFs(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a)
     result_hf_opt = HF().rhf(mol_ch4, cgfs_opt)
@@ -134,37 +113,6 @@ def main():
 
     bounds_all = bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a + bounds_c + bounds_a# For both C2p, C2s, H1s x4
 
-    # Flatten the x0 array and include it as the first entry in the population
-    x0_flattened = np.array([
-        [-0.099967, 0.399513, 0.700115], # coeff C 2S
-        [2.941249, 0.683483, 0.22229], # alpha C 2S
-        [0.155916, 0.607684, 0.391957], # coeff C 2S
-        [2.941249, 0.683483, 0.22229],  # alpha C 2P
-        [0.154329, 0.535328, 0.444635],  # coeff H 1s
-        [0.3425250914E+01, 0.6239137298E+00, 0.1688554040E+00],  # alpha H 1s
-        [0.154329, 0.535328, 0.444635],  # coeff H 1s
-        [0.3425250914E+01, 0.6239137298E+00, 0.1688554040E+00],  # alpha H 1s
-        [0.154329, 0.535328, 0.444635],  # coeff H 1s
-        [0.3425250914E+01, 0.6239137298E+00, 0.1688554040E+00],  # alpha H 1s
-        [0.154329, 0.535328, 0.444635],  # coeff H 1s
-        [0.3425250914E+01, 0.6239137298E+00, 0.1688554040E+00],  # alpha H 1s
-    ]).flatten(order='C')
-
-
-    # Define the number of other population members
-    pop_size = 24
-    dim = len(x0_flattened)  # Dimension of the problem
-
-    # Generate random solutions within bounds for initial population
-    random_population = np.random.uniform(
-        low=[b[0] for b in bounds_all],
-        high=[b[1] for b in bounds_all],
-        size=(pop_size - 1, dim)
-    )
-
-    # Combine x0 and randomly initialized solutions
-    initial_population = np.vstack([x0_flattened, random_population])
-
     # Perform optimization using differential evolution with custom initialization
     result = differential_evolution(
         objective_function,
@@ -172,17 +120,14 @@ def main():
         args=(p_C, p_H1, p_H2, p_H3, p_H4, CH4_c, CH4_a, mol_ch4),
         strategy='best1bin',
         maxiter=1000,
-        popsize=pop_size,
+        popsize=24,
         tol=1e-6,
         mutation=(0.1, 1.2),
         recombination=0.7,
         updating='deferred',
         workers=-1,
         disp=True,
-        # init=initial_population, # Pass the custom population
     )
-
-
 
     print(f"Optimized coefficients and exponents:\n {result.x}")
     print(f"Minimum energy: {result.fun} Hartrees")

@@ -66,9 +66,8 @@ def optimize_gaussians(orbital, num_primitives, zeta, l, m, n, r):
         elif orbital == "2P":
             SSE = np.sum((sto3g - sto_2p) ** 2)
 
-        # Compute and return the objective function (e.g., sum of squared errors)
-        # return np.sum((sto3g - sto_1s) ** 2)
         return SSE
+
     # Set up bounds for optimization
     # Typically, `alphas > 0` and `coefficients` are between -1 and 1
     bounds = [(0, 1000)] * num_primitives + [(-1, 1)] * num_primitives  # Adjust bounds if needed
