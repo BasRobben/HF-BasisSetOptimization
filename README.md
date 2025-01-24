@@ -17,7 +17,7 @@ In addition to analyzing the total electronic energy, the project explores the i
 
 ## Requirements
 
-The following Python packages are required:
+The latest version of the following Python packages are required:
 
 - **For RHF Calculations (main script)**:
   - `numpy`
@@ -27,6 +27,7 @@ The following Python packages are required:
 
 - **For Optimization Scripts**:
   - `scipy` (in addition to the above)
+  - `matplotlib` (for optimizedGuassianCoeffcicientsPlot.py)
 
 ---
 
